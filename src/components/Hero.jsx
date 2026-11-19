@@ -14,9 +14,9 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative mx-auto flex max-w-[1280px] flex-col items-center gap-10 px-[clamp(18px,5vw,64px)] pb-14 pt-6 md:flex-row md:gap-12 md:pb-[90px] md:pt-10"
+      className="relative mx-auto flex max-w-[1280px] flex-col items-center gap-10 px-[clamp(18px,5vw,64px)] pb-14 pt-6 md:flex-row md:items-start md:gap-12 md:pb-[90px] md:pt-12"
     >
-      <div className="w-full min-w-0 flex-1 text-center md:text-left">
+      <div className="w-full min-w-0 flex-1 text-center md:pt-6 md:text-left">
         <p className="font-script text-[28px] font-semibold text-cherry sm:text-[34px]">handmade with love</p>
         <h1 className="mb-4 mt-1 font-display text-[length:clamp(36px,9.5vw,76px)] font-bold leading-[1.06] sm:mb-5 sm:mt-1.5">
           Tiny crochet things, made to go with you.

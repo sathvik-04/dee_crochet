@@ -44,6 +44,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 84px;
+    scrollbar-gutter: stable;
     -webkit-tap-highlight-color: transparent;
   }
   body {
@@ -198,7 +199,7 @@ html.yarn-cursor-active [data-cursor="native"] {
 }
 
 .animate-loader-stitch {
-  animation: loader-stitch 0.95s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: loader-stitch 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -4,7 +4,6 @@ const ProductCard = memo(function ProductCard({ product, index, isPicked, onTogg
   return (
     <article
       className="group relative rounded-[18px] bg-white p-2 pb-3 shadow-[0_8px_24px_rgba(59,36,24,0.08)] transition-transform duration-300 active:scale-[0.98] sm:rounded-[22px] sm:p-2.5 sm:pb-[18px] sm:hover:-translate-y-1.5 sm:hover:-rotate-1"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '200px 300px' }}
     >
       {/* Semantic button trigger for viewing the product (avoids invalid role="button" on <article>) */}
       <button

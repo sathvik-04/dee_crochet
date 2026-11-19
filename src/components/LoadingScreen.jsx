@@ -11,9 +11,6 @@ export default function LoadingScreen() {
   useEffect(() => {
     if (phase === 'done') return;
 
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
     let minDone = false;
     let pageReady = document.readyState === 'complete';
     let fontsReady = !document.fonts;
@@ -22,9 +19,8 @@ export default function LoadingScreen() {
     const dismiss = () => {
       if (dismissed) return;
       dismissed = true;
-      document.body.style.overflow = prevOverflow;
       setPhase('fading');
-      setTimeout(() => setPhase('done'), 420);
+      setTimeout(() => setPhase('done'), 320);
     };
 
     const tryDismiss = () => {
@@ -34,10 +30,10 @@ export default function LoadingScreen() {
     const minTimer = setTimeout(() => {
       minDone = true;
       tryDismiss();
-    }, 850);
+    }, 550);
 
     // Safety cap so slow external resources never trap the loader
-    const maxTimer = setTimeout(dismiss, 1600);
+    const maxTimer = setTimeout(dismiss, 1100);
 
     if (document.fonts) {
       document.fonts.ready.then(() => {
@@ -59,7 +55,6 @@ export default function LoadingScreen() {
       clearTimeout(minTimer);
       clearTimeout(maxTimer);
       window.removeEventListener('load', onLoad);
-      document.body.style.overflow = prevOverflow;
     };
   }, [phase === 'done']);
 
