@@ -96,7 +96,7 @@ export default function PicksTray({ pickedProducts, onRemove, onClear }) {
                 rel="noreferrer"
                 className="flex-1 rounded-full bg-white px-4 py-2.5 text-center text-[14px] font-bold text-cherry transition-transform hover:scale-[1.02] active:scale-[0.98] sm:flex-none sm:px-5 sm:text-[14.5px]"
               >
-                Open Instagram
+                Open Insta DM
               </a>
               <button
                 type="button"
