@@ -94,6 +94,8 @@ export default function Navbar({ page = 'home', onNavigate }) {
           <img
             src="/logo.png"
             alt="deecrochet._ logo"
+            width={40}
+            height={40}
             className="size-10 shrink-0 rounded-full object-cover shadow-sm ring-2 ring-blush transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105"
           />
           <div className="flex min-w-0 flex-col">

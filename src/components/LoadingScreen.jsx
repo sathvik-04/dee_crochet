@@ -16,6 +16,7 @@ export default function LoadingScreen() {
 
     let minDone = false;
     let pageReady = document.readyState === 'complete';
+    let fontsReady = !document.fonts;
     let dismissed = false;
 
     const dismiss = () => {
@@ -23,20 +24,27 @@ export default function LoadingScreen() {
       dismissed = true;
       document.body.style.overflow = prevOverflow;
       setPhase('fading');
-      setTimeout(() => setPhase('done'), 480);
+      setTimeout(() => setPhase('done'), 420);
     };
 
     const tryDismiss = () => {
-      if (minDone && pageReady) dismiss();
+      if (minDone && pageReady && fontsReady) dismiss();
     };
 
     const minTimer = setTimeout(() => {
       minDone = true;
       tryDismiss();
-    }, 950);
+    }, 850);
 
     // Safety cap so slow external resources never trap the loader
-    const maxTimer = setTimeout(dismiss, 1800);
+    const maxTimer = setTimeout(dismiss, 1600);
+
+    if (document.fonts) {
+      document.fonts.ready.then(() => {
+        fontsReady = true;
+        tryDismiss();
+      });
+    }
 
     const onLoad = () => {
       pageReady = true;
@@ -130,6 +138,9 @@ export default function LoadingScreen() {
           <img
             src="/logo.png"
             alt="deecrochet._"
+            width={96}
+            height={96}
+            fetchPriority="high"
             className="relative size-24 rounded-full object-cover shadow-[0_10px_24px_rgba(59,36,24,0.18)] ring-4 ring-cream"
           />
         </div>

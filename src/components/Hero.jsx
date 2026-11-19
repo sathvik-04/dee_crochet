@@ -82,6 +82,8 @@ export default function Hero() {
               src={p.image}
               alt={p.name}
               title={p.name}
+              width={472}
+              height={534}
               fetchPriority="high"
               decoding="async"
               className={`${ring} ${position} cursor-pointer`}

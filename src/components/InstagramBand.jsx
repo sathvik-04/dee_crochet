@@ -18,6 +18,10 @@ export default function InstagramBand() {
             <img
               src="/logo.png"
               alt={`@${site.handle} Instagram profile picture`}
+              width={96}
+              height={96}
+              loading="lazy"
+              decoding="async"
               className="size-24 rounded-full object-cover shadow-[0_10px_28px_rgba(59,36,24,0.35)] ring-4 ring-cream"
             />
           </span>

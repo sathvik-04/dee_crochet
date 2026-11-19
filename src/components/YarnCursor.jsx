@@ -65,12 +65,6 @@ export default function YarnCursor() {
       const labelledEl = el.closest('[data-cursor]');
       const labelKey = labelledEl?.getAttribute('data-cursor') || '';
 
-      if (labelKey === 'view' && el.closest('button, a')) {
-        activeLabel = '';
-        hoveringInteractive = true;
-        return;
-      }
-
       if (labelKey && CURSOR_LABELS[labelKey]) {
         activeLabel = CURSOR_LABELS[labelKey];
         hoveringInteractive = false;

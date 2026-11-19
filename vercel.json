@@ -4,7 +4,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/collection", "destination": "/index.html" },
+    { "source": "/collection/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
@@ -16,13 +17,13 @@
     {
       "source": "/products/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=31536000" }
       ]
     },
     {
       "source": "/logo.png",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=31536000" }
       ]
     },
     {
@@ -30,7 +31,8 @@
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" }
       ]
     }
   ]

@@ -1,5 +1,33 @@
 @import "tailwindcss";
 
+/* Metric-matched fallback fonts to prevent Cumulative Layout Shift (CLS) on webfont swap */
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Georgia');
+  size-adjust: 105%;
+  ascent-override: 93%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'DM Sans Fallback';
+  src: local('Arial'), local('Segoe UI');
+  size-adjust: 103%;
+  ascent-override: 96%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Caveat Fallback';
+  src: local('Segoe Print'), local('Comic Sans MS'), local('Arial');
+  size-adjust: 86%;
+  ascent-override: 100%;
+  descent-override: 28%;
+  line-gap-override: 0%;
+}
+
 @theme {
   --color-cream: #FBF3E4;
   --color-ink: #3B2418;
@@ -7,9 +35,9 @@
   --color-blush: #F3D9CC;
   --color-oat: #F3E3CF;
   --color-leaf: #3F5A2E;
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-script: 'Caveat', cursive;
-  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Fraunces', 'Fraunces Fallback', Georgia, serif;
+  --font-script: 'Caveat', 'Caveat Fallback', cursive;
+  --font-sans: 'DM Sans', 'DM Sans Fallback', system-ui, sans-serif;
 }
 
 @layer base {
