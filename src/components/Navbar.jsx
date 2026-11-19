@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { site } from '../data/site';
 
 const NAV_LINKS = [
-  { href: '#collection', id: 'collection', label: 'Collection' },
-  { href: '#custom', id: 'custom', label: 'Custom orders' },
-  { href: '#about', id: 'about', label: 'About' },
+  { href: '/collection', id: 'collection', label: 'Collection', isPage: true },
+  { href: '#custom', id: 'custom', label: 'Custom orders', isPage: false },
+  { href: '#about', id: 'about', label: 'About', isPage: false },
 ];
 
-export default function Navbar() {
+export default function Navbar({ page = 'home', onNavigate }) {
   const [scrolled, setScrolled] = useState(false);
   const [activeId, setActiveId] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function Navbar() {
         lastScrolled = next;
         setScrolled(next);
       }
-      if (window.scrollY < 140) {
+      if (page === 'home' && window.scrollY < 140) {
         setActiveId('');
       }
       rafId = null;
@@ -37,29 +37,49 @@ export default function Navbar() {
     updateScrolled();
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Track active section with IntersectionObserver (zero layout thrashing on scroll)
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
+    let observer = null;
+    if (page === 'home') {
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              setActiveId(entry.target.id);
+            }
           }
-        }
-      },
-      { rootMargin: '-35% 0px -55% 0px' },
-    );
+        },
+        { rootMargin: '-35% 0px -55% 0px' },
+      );
 
-    for (const item of NAV_LINKS) {
-      const el = document.getElementById(item.id);
-      if (el) observer.observe(el);
+      for (const item of NAV_LINKS) {
+        const el = document.getElementById(item.id);
+        if (el) observer.observe(el);
+      }
+    } else {
+      setActiveId('collection');
     }
 
     return () => {
       window.removeEventListener('scroll', onScroll);
-      observer.disconnect();
+      observer?.disconnect();
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [page]);
+
+  const handleLinkClick = (e, link) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (link.isPage) {
+      onNavigate('collection');
+    } else {
+      onNavigate('home', link.id);
+    }
+  };
+
+  const handleBrandClick = (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    onNavigate('home');
+  };
 
   return (
     <header
@@ -69,9 +89,9 @@ export default function Navbar() {
           : 'border-ink/15 bg-cream/88 shadow-none'
       }`}
     >
-      <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-[clamp(20px,5vw,64px)] py-3">
+      <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-[clamp(18px,5vw,64px)] py-3">
         {/* Brand lockup */}
-        <a href="#top" className="group flex items-center gap-2.5 pl-0.5">
+        <a href="/" onClick={handleBrandClick} className="group flex items-center gap-2.5 pl-0.5">
           <img
             src="/logo.png"
             alt="deecrochet._ logo"
@@ -95,6 +115,7 @@ export default function Navbar() {
               <a
                 key={link.id}
                 href={link.href}
+                onClick={(e) => handleLinkClick(e, link)}
                 className={`relative flex items-center gap-1.5 rounded-full px-4 py-2 text-[15.5px] font-medium transition-all duration-200 ${
                   isActive
                     ? 'bg-blush/85 font-semibold text-cherry'
@@ -163,7 +184,7 @@ export default function Navbar() {
       {menuOpen && (
         <nav
           aria-label="Mobile navigation"
-          className="flex flex-col gap-1 border-t border-dashed border-ink/15 bg-cream/95 px-[clamp(20px,5vw,64px)] py-3 shadow-[0_12px_28px_rgba(59,36,24,0.1)] backdrop-blur-md md:hidden"
+          className="flex flex-col gap-1 border-t border-dashed border-ink/15 bg-cream/95 px-[clamp(18px,5vw,64px)] py-3 shadow-[0_12px_28px_rgba(59,36,24,0.1)] backdrop-blur-md md:hidden"
         >
           {NAV_LINKS.map((link) => {
             const isActive = activeId === link.id;
@@ -171,7 +192,7 @@ export default function Navbar() {
               <a
                 key={link.id}
                 href={link.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => handleLinkClick(e, link)}
                 className={`rounded-2xl px-4 py-3 text-[16px] font-medium transition-colors ${
                   isActive ? 'bg-blush/85 font-semibold text-cherry' : 'text-ink hover:bg-blush/50'
                 }`}

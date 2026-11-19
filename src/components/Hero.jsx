@@ -14,30 +14,30 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative mx-auto flex max-w-[1280px] flex-wrap items-center gap-12 px-[clamp(20px,5vw,64px)] pb-[90px] pt-10"
+      className="relative mx-auto flex max-w-[1280px] flex-col items-center gap-10 px-[clamp(18px,5vw,64px)] pb-14 pt-6 md:flex-row md:gap-12 md:pb-[90px] md:pt-10"
     >
-      <div className="min-w-0 flex-[1_1_420px]">
-        <p className="font-script text-[34px] font-semibold text-cherry">handmade with love</p>
-        <h1 className="mb-5 mt-1.5 font-display text-[length:clamp(42px,6vw,76px)] font-bold leading-[1.05]">
+      <div className="w-full min-w-0 flex-1 text-center md:text-left">
+        <p className="font-script text-[28px] font-semibold text-cherry sm:text-[34px]">handmade with love</p>
+        <h1 className="mb-4 mt-1 font-display text-[length:clamp(36px,9.5vw,76px)] font-bold leading-[1.06] sm:mb-5 sm:mt-1.5">
           Tiny crochet things, made to go with you.
         </h1>
-        <p className="mb-8 max-w-[520px] text-[19px]">
+        <p className="mx-auto mb-7 max-w-[520px] text-[17px] sm:mb-8 sm:text-[19px] md:mx-0">
           Keychains, bag charms, bookmarks and bouquets. Each one is stitched by hand and made to order.
         </p>
-        <div className="flex flex-wrap gap-3.5">
-          <a href="#collection" className="btn btn-primary">See the collection</a>
-          <a href={site.dmUrl} target="_blank" rel="noreferrer" className="btn btn-outline">
+        <div className="flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-3.5 md:justify-start">
+          <a href="#collection" className="btn btn-primary w-full text-center sm:w-auto">See the collection</a>
+          <a href={site.dmUrl} target="_blank" rel="noreferrer" className="btn btn-outline w-full text-center sm:w-auto">
             Order on Instagram
           </a>
         </div>
       </div>
 
-      <div className="relative aspect-square min-w-0 max-w-[500px] flex-[1_1_340px]">
+      <div className="relative mx-auto aspect-square w-full max-w-[310px] min-w-0 sm:max-w-[420px] md:mx-0 md:flex-1 lg:max-w-[500px]">
         {/* Dashed hand-stitched outer halo */}
         <svg
           aria-hidden="true"
           viewBox="0 0 400 400"
-          className="pointer-events-none absolute -inset-3 h-[calc(100%+24px)] w-[calc(100%+24px)]"
+          className="pointer-events-none absolute -inset-2 h-[calc(100%+16px)] w-[calc(100%+16px)] sm:-inset-3 sm:h-[calc(100%+24px)] sm:w-[calc(100%+24px)]"
         >
           <circle
             cx="200"

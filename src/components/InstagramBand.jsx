@@ -5,7 +5,7 @@ export default function InstagramBand() {
   return (
     <div className="relative">
       <CrochetDivider topColor="#FBF3E4" bottomColor="#B91F33" stitchColor="#FBF3E4" />
-      <section className="bg-cherry px-[clamp(20px,5vw,64px)] py-16 text-center text-white">
+      <section className="bg-cherry px-[clamp(18px,5vw,64px)] py-12 text-center text-white sm:py-16">
         <a
           href={site.instagramUrl}
           target="_blank"

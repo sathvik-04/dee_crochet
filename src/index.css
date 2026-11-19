@@ -15,20 +15,32 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-padding-top: 84px;
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     margin: 0;
     background: var(--color-cream);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: clip;
+  }
+  @media (min-width: 640px) {
+    body {
+      font-size: 17px;
+    }
+  }
+  a, button {
+    touch-action: manipulation;
   }
   a { color: inherit; text-decoration: none; }
   :focus-visible { outline: 3px solid var(--color-cherry); outline-offset: 3px; }
 }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
 .btn {
   display: inline-block;

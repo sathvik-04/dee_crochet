@@ -14,16 +14,16 @@ const ProductCard = memo(function ProductCard({ product, index, isPicked, onTogg
       tabIndex={0}
       role="button"
       aria-label={`View ${product.name}`}
-      className="group relative cursor-pointer rounded-[22px] bg-white p-2.5 pb-[18px] shadow-[0_8px_24px_rgba(59,36,24,0.08)] transition-transform duration-300 hover:-translate-y-1.5 hover:-rotate-1"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '260px 360px' }}
+      className="group relative cursor-pointer rounded-[18px] bg-white p-2 pb-3 shadow-[0_8px_24px_rgba(59,36,24,0.08)] transition-transform duration-300 active:scale-[0.98] sm:rounded-[22px] sm:p-2.5 sm:pb-[18px] sm:hover:-translate-y-1.5 sm:hover:-rotate-1"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '200px 300px' }}
     >
-      <div className="relative overflow-hidden rounded-[14px]">
+      <div className="relative overflow-hidden rounded-[12px] sm:rounded-[14px]">
         <img
           src={product.image}
           alt={`Handmade crochet ${product.name.toLowerCase()}`}
           loading="lazy"
           decoding="async"
-          className="aspect-[236/267] w-full rounded-[14px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          className="aspect-[236/267] w-full rounded-[12px] object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:rounded-[14px]"
         />
 
         {/* Top-right heart pick button */}
@@ -35,11 +35,11 @@ const ProductCard = memo(function ProductCard({ product, index, isPicked, onTogg
           }}
           aria-pressed={isPicked}
           aria-label={isPicked ? `Remove ${product.name} from my picks` : `Add ${product.name} to my picks`}
-          className="absolute right-2.5 top-2.5 flex size-9 cursor-pointer items-center justify-center rounded-full bg-white/95 text-cherry shadow-[0_4px_12px_rgba(59,36,24,0.18)] transition-transform duration-200 hover:scale-110 active:scale-95"
+          className="absolute right-2 top-2 flex size-8 cursor-pointer items-center justify-center rounded-full bg-white/95 text-cherry shadow-[0_4px_12px_rgba(59,36,24,0.18)] transition-transform duration-200 hover:scale-110 active:scale-95 sm:right-2.5 sm:top-2.5 sm:size-9"
         >
           <svg
             viewBox="0 0 24 24"
-            className="size-[19px]"
+            className="size-[17px] sm:size-[19px]"
             fill={isPicked ? 'currentColor' : 'none'}
             stroke="currentColor"
             strokeWidth="2"
@@ -51,8 +51,8 @@ const ProductCard = memo(function ProductCard({ product, index, isPicked, onTogg
         </button>
       </div>
 
-      <h3 className="mx-2 mt-3.5 font-display text-xl font-semibold">{product.name}</h3>
-      <p className="mx-2 font-script text-[22px] font-semibold text-leaf">{product.category}</p>
+      <h3 className="mx-1.5 mt-2.5 font-display text-[15.5px] font-semibold leading-snug sm:mx-2 sm:mt-3.5 sm:text-xl">{product.name}</h3>
+      <p className="mx-1.5 font-script text-[18px] font-semibold leading-tight text-leaf sm:mx-2 sm:text-[22px]">{product.category}</p>
     </article>
   );
 });

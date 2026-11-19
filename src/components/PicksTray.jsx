@@ -33,7 +33,10 @@ export default function PicksTray({ pickedProducts, onRemove, onClear }) {
   };
 
   return (
-    <div className="fixed bottom-4 left-1/2 z-40 w-[min(460px,calc(100vw-28px))] -translate-x-1/2">
+    <div
+      className="fixed left-1/2 z-40 w-[min(460px,calc(100vw-24px))] -translate-x-1/2"
+      style={{ bottom: 'max(14px, env(safe-area-inset-bottom))' }}
+    >
       <div className="overflow-hidden rounded-[20px] bg-ink text-cream shadow-[0_18px_45px_rgba(59,36,24,0.38)]">
         {/* Header Bar */}
         <button
@@ -79,11 +82,11 @@ export default function PicksTray({ pickedProducts, onRemove, onClear }) {
               className="mt-2.5 w-full resize-none rounded-[14px] bg-cream p-3.5 text-[14.5px] leading-snug text-ink focus:outline-none"
             />
 
-            <div className="mt-3.5 flex flex-wrap items-center gap-2.5">
+            <div className="mt-3.5 flex flex-wrap items-center gap-2 sm:gap-2.5">
               <button
                 type="button"
                 onClick={handleCopy}
-                className="cursor-pointer rounded-full bg-white px-5 py-2.5 text-[14.5px] font-bold text-cherry transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                className="flex-1 cursor-pointer rounded-full bg-white px-4 py-2.5 text-center text-[14px] font-bold text-cherry transition-transform hover:scale-[1.02] active:scale-[0.98] sm:flex-none sm:px-5 sm:text-[14.5px]"
               >
                 {copied ? 'Copied!' : 'Copy message'}
               </button>
@@ -91,7 +94,7 @@ export default function PicksTray({ pickedProducts, onRemove, onClear }) {
                 href={site.dmUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full bg-white px-5 py-2.5 text-[14.5px] font-bold text-cherry transition-transform hover:scale-[1.02]"
+                className="flex-1 rounded-full bg-white px-4 py-2.5 text-center text-[14px] font-bold text-cherry transition-transform hover:scale-[1.02] active:scale-[0.98] sm:flex-none sm:px-5 sm:text-[14.5px]"
               >
                 Open Instagram
               </a>
@@ -101,7 +104,7 @@ export default function PicksTray({ pickedProducts, onRemove, onClear }) {
                   onClear();
                   setOpen(false);
                 }}
-                className="ml-auto cursor-pointer text-[14px] text-cream/75 underline underline-offset-4 transition-colors hover:text-cream"
+                className="w-full cursor-pointer pt-1 text-center text-[13.5px] text-cream/75 underline underline-offset-4 transition-colors hover:text-cream sm:ml-auto sm:w-auto sm:pt-0 sm:text-[14px]"
               >
                 Clear all
               </button>

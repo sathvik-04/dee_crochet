@@ -1,51 +1,17 @@
-import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
-import { products, categories } from '../data/products';
+import { lazy, Suspense, useCallback, useMemo, useState } from 'react';
+import { products } from '../data/products';
 import SectionHeading from './SectionHeading';
-import CategoryFilter from './CategoryFilter';
 import ProductCard from './ProductCard';
-import PicksTray from './PicksTray';
 
 const ProductModal = lazy(() => import('./ProductModal'));
 
-const STORAGE_KEY = 'deecrochet_picks';
+const FEATURED_COUNT = 8;
 
-export default function Collection() {
-  const [active, setActive] = useState('All');
+export default function Collection({ picksSet, onTogglePick, onSeeAll }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
-  const [picks, setPicks] = useState(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      return Array.isArray(saved) ? saved.filter((id) => products.some((p) => p.id === id)) : [];
-    } catch {
-      return [];
-    }
-  });
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(picks));
-    } catch {
-      // Ignore storage quota / privacy errors
-    }
-  }, [picks]);
-
-  const shown = useMemo(
-    () => (active === 'All' ? products : products.filter((p) => p.category === active)),
-    [active],
-  );
-
-  const picksSet = useMemo(() => new Set(picks), [picks]);
-
-  const pickedProducts = useMemo(
-    () => picks.map((id) => products.find((p) => p.id === id)).filter(Boolean),
-    [picks],
-  );
-
-  const selectedProduct = selectedIndex !== null ? shown[selectedIndex] : null;
-
-  const togglePick = useCallback((id) => {
-    setPicks((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
-  }, []);
+  const featured = useMemo(() => products.slice(0, FEATURED_COUNT), []);
+  const selectedProduct = selectedIndex !== null ? featured[selectedIndex] : null;
 
   const handleOpen = useCallback((idx) => {
     setSelectedIndex(idx);
@@ -55,38 +21,41 @@ export default function Collection() {
     setSelectedIndex(null);
   }, []);
 
-  const handleCategoryChange = useCallback((cat) => {
-    setActive(cat);
-    setSelectedIndex(null);
-  }, []);
-
   const handlePrev = useCallback(() => {
-    setSelectedIndex((i) => (i === null ? null : (i - 1 + shown.length) % shown.length));
-  }, [shown.length]);
+    setSelectedIndex((i) => (i === null ? null : (i - 1 + featured.length) % featured.length));
+  }, [featured.length]);
 
   const handleNext = useCallback(() => {
-    setSelectedIndex((i) => (i === null ? null : (i + 1) % shown.length));
-  }, [shown.length]);
-
-  const handleClear = useCallback(() => {
-    setPicks([]);
-  }, []);
+    setSelectedIndex((i) => (i === null ? null : (i + 1) % featured.length));
+  }, [featured.length]);
 
   return (
-    <section id="collection" className="mx-auto max-w-[1280px] px-[clamp(20px,5vw,64px)] pb-[90px] pt-8">
-      <SectionHeading script="pick a favourite" title="The collection" className="mb-7 text-center" />
-      <CategoryFilter categories={categories} active={active} onChange={handleCategoryChange} />
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
-        {shown.map((p, idx) => (
+    <section id="collection" className="mx-auto max-w-[1280px] px-[clamp(14px,4.5vw,64px)] pb-16 pt-6 sm:pb-[90px] sm:pt-8">
+      <SectionHeading script="pick a favourite" title="The collection" className="mb-7 text-center sm:mb-9" />
+
+      <div className="grid grid-cols-2 gap-3.5 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
+        {featured.map((p, idx) => (
           <ProductCard
             key={p.id}
             product={p}
             index={idx}
             isPicked={picksSet.has(p.id)}
-            onTogglePick={togglePick}
+            onTogglePick={onTogglePick}
             onOpen={handleOpen}
           />
         ))}
+      </div>
+
+      {/* See all products button -> opens dedicated All Products page */}
+      <div className="mt-10 text-center sm:mt-12">
+        <button
+          type="button"
+          onClick={onSeeAll}
+          className="btn btn-primary inline-flex cursor-pointer items-center gap-2"
+        >
+          <span>See all products ({products.length})</span>
+          <span aria-hidden="true">→</span>
+        </button>
       </div>
 
       {selectedProduct && (
@@ -94,21 +63,15 @@ export default function Collection() {
           <ProductModal
             product={selectedProduct}
             index={selectedIndex}
-            total={shown.length}
+            total={featured.length}
             isPicked={picksSet.has(selectedProduct.id)}
-            onTogglePick={togglePick}
+            onTogglePick={onTogglePick}
             onClose={handleClose}
             onPrev={handlePrev}
             onNext={handleNext}
           />
         </Suspense>
       )}
-
-      <PicksTray
-        pickedProducts={pickedProducts}
-        onRemove={togglePick}
-        onClear={handleClear}
-      />
     </section>
   );
 }
