@@ -89,7 +89,7 @@ export default function App() {
       <SideYarnDecor />
       <Navbar page={page} onNavigate={navigate} />
 
-      <main className="pt-[74px]">
+      <main className="pt-[82px] sm:pt-[74px]">
         {page === 'collection' ? (
           <Suspense fallback={<div className="min-h-[75vh]" />}>
             <AllProductsPage

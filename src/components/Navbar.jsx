@@ -88,16 +88,16 @@ export default function Navbar({ page = 'home', onNavigate }) {
         : 'border-ink/15 bg-cream/88 shadow-none'
         }`}
     >
-      <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-2 px-3.5 py-2.5 sm:gap-4 sm:px-[clamp(18px,5vw,64px)] sm:py-3">
+      <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-2.5 px-4 py-3.5 sm:gap-4 sm:px-[clamp(18px,5vw,64px)] sm:py-3">
         {/* Brand lockup */}
-        <a href="/" onClick={handleBrandClick} className="group flex min-w-0 items-center gap-2 pl-0.5 sm:gap-2.5">
+        <a href="/" onClick={handleBrandClick} className="group flex min-w-0 items-center gap-2.5 pl-0.5">
           <img
             src="/logo.png"
             alt="deecrochet._ logo"
-            className="size-9 shrink-0 rounded-full object-cover shadow-sm ring-2 ring-blush transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105 sm:size-10"
+            className="size-10 shrink-0 rounded-full object-cover shadow-sm ring-2 ring-blush transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105"
           />
           <div className="flex min-w-0 flex-col">
-            <span className="truncate font-display text-[19px] font-bold leading-none tracking-tight sm:text-[24px]">
+            <span className="truncate font-display text-[21px] font-bold leading-none tracking-tight sm:text-[24px]">
               deecrochet<span className="text-cherry">._</span>
             </span>
             <span className="hidden font-script text-[15px] font-semibold leading-none text-leaf sm:block">
@@ -128,17 +128,17 @@ export default function Navbar({ page = 'home', onNavigate }) {
         </nav>
 
         {/* Right CTA + Mobile menu button */}
-        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <a
             href={site.dmUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-cherry px-3.5 py-2 text-[13.5px] font-bold text-white shadow-[0_6px_18px_rgba(185,31,51,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_9px_22px_rgba(185,31,51,0.36)] hover:brightness-105 active:translate-y-0 active:scale-95 sm:gap-2 sm:px-5 sm:py-2.5 sm:text-[15px]"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-cherry px-4 py-2.5 text-[14px] font-bold text-white shadow-[0_6px_18px_rgba(185,31,51,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_9px_22px_rgba(185,31,51,0.36)] hover:brightness-105 active:translate-y-0 active:scale-95 sm:gap-2 sm:px-5 sm:text-[15px]"
           >
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
-              className="size-3.5 shrink-0 sm:size-4"
+              className="size-4 shrink-0"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -150,8 +150,8 @@ export default function Navbar({ page = 'home', onNavigate }) {
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
             </svg>
             <span className="hidden sm:inline">DM on Instagram</span>
-            <span className="hidden min-[400px]:inline sm:hidden">DM us</span>
-            <span className="min-[400px]:hidden">DM</span>
+            <span className="hidden min-[380px]:inline sm:hidden">DM us</span>
+            <span className="min-[380px]:hidden">DM</span>
           </a>
 
           <button
@@ -159,7 +159,7 @@ export default function Navbar({ page = 'home', onNavigate }) {
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            className="flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-dashed border-ink/25 bg-cream text-ink transition-colors hover:bg-blush/60 sm:size-10 md:hidden"
+            className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-dashed border-ink/25 bg-cream text-ink transition-colors hover:bg-blush/60 md:hidden"
           >
             <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {menuOpen ? (
