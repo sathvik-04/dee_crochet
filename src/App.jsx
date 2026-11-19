@@ -7,10 +7,12 @@ import InstagramBand from './components/InstagramBand';
 import Footer from './components/Footer';
 import SideYarnDecor from './components/SideYarnDecor';
 import YarnCursor from './components/YarnCursor';
+import LoadingScreen from './components/LoadingScreen';
 
 export default function App() {
   return (
     <div className="relative">
+      <LoadingScreen />
       <YarnCursor />
       <SideYarnDecor />
       <Navbar />

@@ -143,6 +143,24 @@ html.yarn-cursor-active [data-cursor="native"] {
   cursor: text !important;
 }
 
+@keyframes loader-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loader-stitch {
+  0% { stroke-dashoffset: 1; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.animate-loader-spin {
+  animation: loader-spin 9s linear infinite;
+}
+
+.animate-loader-stitch {
+  animation: loader-stitch 0.95s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
